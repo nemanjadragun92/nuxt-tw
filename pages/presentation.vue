@@ -211,7 +211,7 @@ export default class PresentationBase extends Vue {
       scroll-behavior: smooth;
       width: calc(100% - 5rem);
       &::-webkit-scrollbar {
-        display: none;
+        @apply hidden;
       }
       li {
         white-space: nowrap;
