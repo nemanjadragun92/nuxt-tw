@@ -1,16 +1,42 @@
 <template>
-  <div>
-    Parent presentation
-    <ul>
-      <li
-        v-for="(slide, slideIndex) in slides"
-        :key="slide.slug"
-        @click="$router.push({ path: `/presentation/slide/${slide.slug}` })"
-      >
-        Slide {{ slideIndex + 1 }}
-      </li>
-    </ul>
-    <nuxt-child />
+  <div class="presentation">
+    <div class="presentation__wrapper">
+      <div class="presentation__navigation">
+        <button
+          :class="{
+            hidden: !showButtonPrev,
+          }"
+          class="presentation__navigation-prev"
+          type="button"
+          @click="onScroll('prev')"
+        >
+          <i class="material-icons">navigate_before</i>
+        </button>
+        <ul ref="presentationNavigation">
+          <li
+            v-for="slide in slides"
+            :key="slide.slug"
+            :class="{
+              active: isActive(slide.slug),
+            }"
+            @click="$router.push({ path: `/presentation/slide/${slide.slug}` })"
+          >
+            {{ slide.title }}
+          </li>
+        </ul>
+        <button
+          class="presentation__navigation-next"
+          type="button"
+          :class="{
+            hidden: !showButtonNext,
+          }"
+          @click="onScroll('next')"
+        >
+          <i class="material-icons">navigate_next</i>
+        </button>
+      </div>
+      <nuxt-child />
+    </div>
   </div>
 </template>
 
@@ -23,7 +49,13 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
   layout: 'presentation',
 })
 export default class PresentationBase extends Vue {
+  // Data
   slides: PresentationInterface[] | IContentDocument[] = []
+  scrollOffsetValue: number = 0
+  showButtonPrev: boolean = false
+  showButtonNext: boolean = true
+
+  // Hooks
   validate({ params, redirect }: { params: { id: string }; redirect: any }) {
     // If param doesnt exist in route redirect to first slide
     if (!params.id) {
@@ -33,7 +65,109 @@ export default class PresentationBase extends Vue {
   }
 
   async fetch() {
-    this.slides = await this.$content('slides').fetch<PresentationInterface[]>()
+    this.slides = await this.$content('slides')
+      .sortBy('slug', 'asc')
+      .fetch<PresentationInterface[]>()
+  }
+
+  // Methods
+  onScroll(scrollType: 'prev' | 'next') {
+    const element = this.$refs.presentationNavigation as HTMLElement
+    const elWidth = element.offsetWidth
+    let leftScrollOffset = elWidth - 150
+    if (scrollType === 'prev') {
+      leftScrollOffset = -leftScrollOffset
+    }
+    this.scrollOffsetValue += leftScrollOffset
+    if (this.scrollOffsetValue > elWidth) {
+      this.scrollOffsetValue = elWidth
+    } else if (this.scrollOffsetValue < 0) {
+      this.scrollOffsetValue = 0
+    }
+    element.scrollBy({
+      left: leftScrollOffset,
+      behavior: 'smooth',
+    })
+    this.showButtonPrev = this.scrollOffsetValue >= 1
+    this.showButtonNext = this.scrollOffsetValue !== elWidth
+  }
+
+  isActive(id: string): boolean {
+    return id === this.$route.params.id
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.presentation {
+  @apply h-full w-full;
+  @apply flex items-center justify-center;
+  @apply bg-gray-200;
+  @apply dark:bg-gray-900;
+  &__wrapper {
+    @apply overflow-hidden;
+    @apply w-full h-full max-w-[1280px] max-h-full p-2;
+    @apply md:w-[85%] md:h-[80%] md:max-h-[768px] md:p-0;
+    @apply bg-gray-100;
+    @apply dark:bg-gray-800;
+  }
+  &__navigation {
+    @apply relative;
+    @apply bg-gray-100;
+    @apply dark:bg-gray-800;
+    @apply flex items-center;
+    &:after {
+      content: '';
+      @apply absolute top-0 right-0 bottom-0 left-0;
+      @apply opacity-90;
+      @apply bg-gradient-to-r from-transparent to-gray-200;
+      @apply dark:to-gray-900;
+      @apply pointer-events-none;
+    }
+    ul {
+      @apply h-10;
+      @apply flex items-center;
+      @apply overflow-auto;
+      scroll-behavior: smooth;
+      width: calc(100% - 5rem);
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      li {
+        white-space: nowrap;
+        @apply ml-2 cursor-pointer text-sm;
+        @apply flex items-center;
+        @apply transition duration-200;
+        @apply hover:text-green-600;
+        &:not(:last-child):after {
+          font-family: 'Material Icons';
+          content: 'arrow_forward';
+          @apply ml-1.5;
+          @apply text-primary-900;
+          @apply dark:text-primary-50;
+        }
+        &.active {
+          @apply text-green-600;
+        }
+      }
+    }
+    &-prev,
+    &-next {
+      @apply relative z-10;
+      @apply flex items-center justify-center;
+      @apply transition duration-200;
+      @apply focus:outline-none;
+      @apply w-10 h-10;
+      @apply bg-gray-100;
+      @apply dark:bg-gray-800;
+      @apply hover:text-green-600;
+      &.hidden {
+        @apply opacity-5 cursor-not-allowed;
+      }
+    }
+    &-next {
+      @apply ml-2;
+    }
+  }
+}
+</style>
