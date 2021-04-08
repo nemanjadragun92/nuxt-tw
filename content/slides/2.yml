@@ -1,5 +1,9 @@
-title: About nuxt
-description: This is my second slide
-tada:
-  STR: 321312
-  ST2R: 432423
+type: credentials
+navigationTitle: Introduction
+publisher:
+  name: Nemanja Dragun
+  role: Frontend Developer
+date: 10.10.2021
+social:
+  linkedIn: http://google.com
+  github: http://google.com

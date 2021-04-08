@@ -1,5 +1,7 @@
-title: Welcome
-description: This is nuxt and see you next time
-tada:
-  STR: 321312
-  ST2R: 432423
+type: intro
+navigationTitle: Welcome
+title: Welcome to presentation about
+description: Nuxt.js + Tailwind
+image:
+  light: /images/nuxt-tw-logo-light.svg
+  dark: /images/nuxt-tw-logo-dark.svg

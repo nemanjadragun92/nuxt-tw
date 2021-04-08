@@ -12,13 +12,11 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class LayoutPresentation extends Vue {
-  // Data
-  darkMode: boolean = false
-
   // Methods
-  onThemeSwitch() {
-    this.darkMode = !this.darkMode
-    if (this.darkMode) {
+  async onThemeSwitch() {
+    await this.$store.commit('TOGGLE_DARK_MODE')
+    const { darkMode } = this.$store.state
+    if (darkMode) {
       document.body.classList.add('dark')
     } else {
       document.body.classList.remove('dark')

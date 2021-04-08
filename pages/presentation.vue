@@ -25,7 +25,7 @@
               $router.push({ path: `/presentation/slide/${slide.slug}` })
             "
           >
-            {{ slide.title }}
+            {{ slide.navigationTitle }}
           </li>
         </ul>
         <button

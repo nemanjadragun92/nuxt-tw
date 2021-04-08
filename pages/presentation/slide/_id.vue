@@ -1,11 +1,8 @@
 <template>
-  <div>
-    Slide id: {{ $route.params.id }}
-
-    <pre>
-    {{ slide }}
-  </pre
-    >
+  <div class="slide">
+    <transition name="slide-fade">
+      <component :is="renderComponent" :data="returnSlideData" />
+    </transition>
   </div>
 </template>
 
@@ -33,5 +30,43 @@ export default class PresentationSlide extends Vue {
       await this.$nuxt.context.redirect('/presentation')
     }
   }
+
+  // Getters
+  get returnSlideData(): PresentationInterface | {} {
+    return Object(this.slide)
+  }
+
+  get renderComponent(): any {
+    let component = 'default'
+    const { type } = this.returnSlideData
+    if (type) {
+      component = type
+    }
+    // @ts-ignore
+    return () => import(`@/components/slider/type/${component}`)
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.slide {
+  @apply p-4 pb-0 h-full;
+  ::v-deep {
+    & > * {
+      @apply h-full;
+    }
+    img {
+      @apply block max-w-full max-h-full m-auto;
+    }
+  }
+}
+// Transition
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  @apply transition duration-200;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  @apply opacity-0;
+}
+</style>
