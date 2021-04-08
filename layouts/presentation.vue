@@ -29,6 +29,24 @@ export default class LayoutPresentation extends Vue {
       document.body.classList.remove('dark')
     }
   }
+
+  // SEO
+  head() {
+    return {
+      meta: [
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: 'Nuxt.js + Tailwind Demo Slider',
+        },
+        {
+          hid: 'apple-mobile-web-app-title',
+          name: 'apple-mobile-web-app-title',
+          content: 'Nuxt.js + Tailwind Demo Slider',
+        },
+      ],
+    }
+  }
 }
 </script>
 

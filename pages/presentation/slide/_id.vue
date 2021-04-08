@@ -45,6 +45,31 @@ export default class PresentationSlide extends Vue {
     // @ts-ignore
     return () => import(`@/components/slider/type/${component}`)
   }
+
+  // SEO
+  head() {
+    const data = this.returnSlideData as PresentationInterface
+    return {
+      title: data.navigationTitle,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: data.description,
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: data.title,
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: data.description,
+        },
+      ],
+    }
+  }
 }
 </script>
 
