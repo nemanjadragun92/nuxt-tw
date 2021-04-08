@@ -16,10 +16,14 @@
           <li
             v-for="slide in slides"
             :key="slide.slug"
+            :tabindex="slide.slug"
             :class="{
               active: isActive(slide.slug),
             }"
             @click="$router.push({ path: `/presentation/slide/${slide.slug}` })"
+            @keypress.enter="
+              $router.push({ path: `/presentation/slide/${slide.slug}` })
+            "
           >
             {{ slide.title }}
           </li>
@@ -138,6 +142,7 @@ export default class PresentationBase extends Vue {
         @apply ml-2 cursor-pointer text-sm;
         @apply flex items-center;
         @apply transition duration-200;
+        @apply focus:text-blue-500;
         @apply hover:text-green-600;
         &:not(:last-child):after {
           font-family: 'Material Icons';
@@ -156,7 +161,7 @@ export default class PresentationBase extends Vue {
       @apply relative z-10;
       @apply flex items-center justify-center;
       @apply transition duration-200;
-      @apply focus:outline-none;
+      @apply focus:outline-none focus:text-blue-400;
       @apply w-10 h-10;
       @apply bg-gray-100;
       @apply dark:bg-gray-800;
