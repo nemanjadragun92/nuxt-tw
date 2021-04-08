@@ -12,7 +12,7 @@
         >
           <i class="material-icons">navigate_before</i>
         </button>
-        <ul ref="presentationNavigation">
+        <ul ref="presentationScrollNavigation">
           <li
             v-for="slide in slides"
             :key="slide.slug"
@@ -20,10 +20,8 @@
             :class="{
               active: isActive(slide.slug),
             }"
-            @click="$router.push({ path: `/presentation/slide/${slide.slug}` })"
-            @keypress.enter="
-              $router.push({ path: `/presentation/slide/${slide.slug}` })
-            "
+            @click="goToSlide(slide.slug)"
+            @keypress.enter="goToSlide(slide.slug)"
           >
             {{ slide.navigationTitle }}
           </li>
@@ -44,6 +42,22 @@
         <div class="watermark">
           <img src="/images/logo-blue.svg" alt="Logo" />
           <span>Egoditor</span>
+        </div>
+        <div class="presentation__pagination">
+          <button
+            :disabled="currentSlide <= 1"
+            type="button"
+            @click="slidePrev"
+          >
+            <span class="material-icons-outlined"> skip_previous </span>
+          </button>
+          <button
+            type="button"
+            :disabled="currentSlide >= totalSlides"
+            @click="slideNext"
+          >
+            <span class="material-icons-outlined"> skip_next </span>
+          </button>
         </div>
       </div>
     </div>
@@ -80,9 +94,18 @@ export default class PresentationBase extends Vue {
       .fetch<PresentationInterface[]>()
   }
 
+  // Getters
+  get currentSlide(): number {
+    return +this.$route.params.id
+  }
+
+  get totalSlides(): number {
+    return this.slides.length
+  }
+
   // Methods
   onScroll(scrollType: 'prev' | 'next') {
-    const element = this.$refs.presentationNavigation as HTMLElement
+    const element = this.$refs.presentationScrollNavigation as HTMLElement
     const elWidth = element.offsetWidth
     let leftScrollOffset = elWidth - 150
     if (scrollType === 'prev') {
@@ -100,6 +123,26 @@ export default class PresentationBase extends Vue {
     })
     this.showButtonPrev = this.scrollOffsetValue >= 1
     this.showButtonNext = this.scrollOffsetValue !== elWidth
+  }
+
+  goToSlide(slide: string) {
+    this.$router.push({ path: `/presentation/slide/${slide}` })
+  }
+
+  slidePrev() {
+    let currentSlide = this.currentSlide
+    if (currentSlide > 1) {
+      currentSlide--
+      this.goToSlide(currentSlide.toString())
+    }
+  }
+
+  slideNext() {
+    let currentSlide = this.currentSlide
+    if (currentSlide < this.totalSlides) {
+      currentSlide++
+      this.goToSlide(currentSlide.toString())
+    }
   }
 
   isActive(id: string): boolean {
@@ -183,6 +226,19 @@ export default class PresentationBase extends Vue {
   &__container {
     height: calc(100% - 2.5rem);
     @apply relative pb-16;
+  }
+  &__pagination {
+    @apply absolute bottom-4 right-12 z-10;
+    @apply md:right-4;
+    @apply flex items-center;
+    button {
+      @apply flex items-center justify-center mx-1;
+      @apply focus:outline-none focus:text-blue-400;
+      @apply disabled:opacity-50 disabled:cursor-not-allowed;
+      &:not(:disabled) {
+        @apply hover:text-green-600;
+      }
+    }
   }
 }
 .watermark {
