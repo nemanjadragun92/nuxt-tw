@@ -10,19 +10,20 @@
         Slide {{ slideIndex + 1 }}
       </li>
     </ul>
-    <nuxt-child></nuxt-child>
+    <nuxt-child />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { IContentDocument } from '@nuxt/content/types/content'
 import { PresentationInterface } from '~/interfaces/PresentationInterface'
 
 @Component({
   layout: 'presentation',
 })
 export default class PresentationBase extends Vue {
-  slides: PresentationInterface[] = []
+  slides: PresentationInterface[] | IContentDocument[] = []
   validate({ params, redirect }: { params: { id: string }; redirect: any }) {
     // If param doesnt exist in route redirect to first slide
     if (!params.id) {
@@ -32,9 +33,7 @@ export default class PresentationBase extends Vue {
   }
 
   async fetch() {
-    this.slides = (await this.$content(
-      'slides'
-    ).fetch()) as PresentationInterface[]
+    this.slides = await this.$content('slides').fetch<PresentationInterface[]>()
   }
 }
 </script>
