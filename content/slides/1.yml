@@ -2,6 +2,6 @@ type: intro
 navigationTitle: Welcome
 title: Welcome to presentation about
 description: Nuxt.js + Tailwind
-image:
+imageVariant:
   light: /images/nuxt-tw-logo-light.svg
   dark: /images/nuxt-tw-logo-dark.svg

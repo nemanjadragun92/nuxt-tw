@@ -38,11 +38,11 @@ import {
   layout: 'presentation',
 })
 export default class SliderTypeCredentials extends Vue {
-  @Prop({ require: true })
+  @Prop({ required: true })
   data!: PresentationInterface
 
   // Getters
-  get returnCredentials(): CredentialsInterface {
+  get returnCredentials(): PresentationInterface {
     return this.data
   }
 }

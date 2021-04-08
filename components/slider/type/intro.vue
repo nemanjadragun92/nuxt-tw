@@ -12,13 +12,14 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import get from 'lodash/get'
 import { PresentationInterface } from '~/interfaces/PresentationInterface'
 
 @Component({
   layout: 'presentation',
 })
 export default class SliderTypeIntro extends Vue {
-  @Prop({ require: true })
+  @Prop({ required: true })
   data!: PresentationInterface
 
   // Getters
@@ -27,7 +28,7 @@ export default class SliderTypeIntro extends Vue {
     if (this.$store.state.darkMode) {
       imageType = 'dark'
     }
-    return this.data.image[imageType]
+    return get(this.data.imageVariant, imageType) as string
   }
 }
 </script>

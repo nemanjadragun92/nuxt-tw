@@ -1,7 +1,7 @@
 <template>
   <div class="layout-presentation">
     <Nuxt />
-    <button type="button" class="theme-switch" @click="onThemeSwitch">
+    <button type="button" class="theme-switch" @click="onThemeSwitch(false)">
       <i class="material-icons">dark_mode</i>
     </button>
   </div>
@@ -12,9 +12,16 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class LayoutPresentation extends Vue {
+  // Hooks
+  mounted() {
+    this.onThemeSwitch(true)
+  }
+
   // Methods
-  async onThemeSwitch() {
-    await this.$store.commit('TOGGLE_DARK_MODE')
+  async onThemeSwitch(init: boolean) {
+    if (!init) {
+      await this.$store.commit('TOGGLE_DARK_MODE')
+    }
     const { darkMode } = this.$store.state
     if (darkMode) {
       document.body.classList.add('dark')

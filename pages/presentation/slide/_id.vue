@@ -38,7 +38,7 @@ export default class PresentationSlide extends Vue {
 
   get renderComponent(): any {
     let component = 'default'
-    const { type } = this.returnSlideData
+    const { type } = this.returnSlideData as PresentationInterface
     if (type) {
       component = type
     }

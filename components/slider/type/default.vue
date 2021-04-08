@@ -16,7 +16,7 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
   layout: 'presentation',
 })
 export default class SliderTypeDefault extends Vue {
-  @Prop({ require: true })
+  @Prop({ required: true })
   data!: PresentationInterface
 }
 </script>

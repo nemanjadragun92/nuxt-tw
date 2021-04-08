@@ -44,19 +44,25 @@
           <span>Egoditor</span>
         </div>
         <div class="presentation__pagination">
+          <button class="fullscreen" type="button" @click="toggleFullScreen">
+            <span
+              class="material-icons-outlined"
+              v-text="fullscreenMode ? 'fullscreen_exit' : 'fullscreen'"
+            />
+          </button>
           <button
             :disabled="currentSlide <= 1"
             type="button"
             @click="slidePrev"
           >
-            <span class="material-icons-outlined"> skip_previous </span>
+            <span class="material-icons-outlined">skip_previous</span>
           </button>
           <button
             type="button"
             :disabled="currentSlide >= totalSlides"
             @click="slideNext"
           >
-            <span class="material-icons-outlined"> skip_next </span>
+            <span class="material-icons-outlined">skip_next</span>
           </button>
         </div>
       </div>
@@ -78,6 +84,7 @@ export default class PresentationBase extends Vue {
   scrollOffsetValue: number = 0
   showButtonPrev: boolean = false
   showButtonNext: boolean = true
+  fullscreenMode: boolean = false
 
   // Hooks
   validate({ params, redirect }: { params: { id: string }; redirect: any }) {
@@ -92,6 +99,18 @@ export default class PresentationBase extends Vue {
     this.slides = await this.$content('slides')
       .sortBy('slug', 'asc')
       .fetch<PresentationInterface[]>()
+  }
+
+  mounted() {
+    document.addEventListener('fullscreenchange', () => {
+      this.fullscreenMode = !!document.fullscreenElement
+    })
+  }
+
+  beforeDestroy() {
+    document.removeEventListener('fullscreenchange', () => {
+      this.fullscreenMode = !!document.fullscreenElement
+    })
   }
 
   // Getters
@@ -145,6 +164,14 @@ export default class PresentationBase extends Vue {
     }
   }
 
+  toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen()
+    }
+  }
+
   isActive(id: string): boolean {
     return id === this.$route.params.id
   }
@@ -159,8 +186,8 @@ export default class PresentationBase extends Vue {
   @apply dark:bg-gray-900;
   &__wrapper {
     @apply overflow-hidden;
-    @apply w-full h-full max-w-[1280px] max-h-full p-2;
-    @apply md:w-[85%] md:h-[80%] md:max-h-[768px] md:p-0;
+    @apply w-full h-full max-w-[1280px] max-h-full;
+    @apply md:w-[85%] md:h-[80%] md:max-h-[768px];
     @apply bg-gray-100;
     @apply dark:bg-gray-800;
   }
@@ -228,7 +255,7 @@ export default class PresentationBase extends Vue {
     @apply relative pb-16;
   }
   &__pagination {
-    @apply absolute bottom-4 right-12 z-10;
+    @apply absolute bottom-4 right-14 z-10;
     @apply md:right-4;
     @apply flex items-center;
     button {
@@ -237,6 +264,10 @@ export default class PresentationBase extends Vue {
       @apply disabled:opacity-50 disabled:cursor-not-allowed;
       &:not(:disabled) {
         @apply hover:text-green-600;
+      }
+      &.fullscreen {
+        @apply hidden;
+        @apply md:flex;
       }
     }
   }

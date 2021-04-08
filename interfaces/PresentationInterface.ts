@@ -11,9 +11,11 @@ export interface CredentialsInterface {
 }
 
 export interface PresentationInterface {
+  type: 'default' | 'intro' | 'credentials'
   navigationTitle: string
   title?: string
   description?: string
-  image?: string | { light: string; dark: string }
+  image?: string
+  imageVariant?: { light: string; dark: string }
   credentials: CredentialsInterface
 }
