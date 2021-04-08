@@ -148,7 +148,7 @@ export default class PresentationBase extends Vue {
         @apply ml-2 cursor-pointer text-sm;
         @apply flex items-center;
         @apply transition duration-200;
-        @apply focus:text-blue-500;
+        @apply focus:outline-none focus:text-blue-500;
         @apply hover:text-green-600;
         &:not(:last-child):after {
           font-family: 'Material Icons';
