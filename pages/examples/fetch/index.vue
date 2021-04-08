@@ -89,7 +89,7 @@ export default class ExamplesFetch extends Vue {
     try {
       let url = 'https://api.chucknorris.io/jokes/random'
       if (this.jokeCount > this.jokeLimit) {
-        url += '/error'
+        url += '/error' // Reproduce error just as an example
       }
       this.data = await this.$axios.$get(url)
     } catch (e) {
