@@ -39,7 +39,13 @@
           <i class="material-icons">navigate_next</i>
         </button>
       </div>
-      <nuxt-child />
+      <div class="presentation__container">
+        <nuxt-child />
+        <div class="watermark">
+          <img src="/images/logo-blue.svg" alt="Logo" />
+          <span>Egoditor</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -173,6 +179,20 @@ export default class PresentationBase extends Vue {
     &-next {
       @apply ml-2;
     }
+  }
+  &__container {
+    height: calc(100% - 2.5rem);
+    @apply relative pb-16;
+  }
+}
+.watermark {
+  @apply absolute bottom-4 left-4 z-10;
+  @apply flex items-center;
+  img {
+    @apply block w-8;
+  }
+  span {
+    @apply ml-2 font-medium;
   }
 }
 </style>
