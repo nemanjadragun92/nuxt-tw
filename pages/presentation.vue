@@ -205,11 +205,11 @@ export default class PresentationBase extends Vue {
       @apply pointer-events-none;
     }
     ul {
+      scroll-behavior: smooth;
+      width: calc(100% - 5rem);
       @apply h-10;
       @apply flex items-center;
       @apply overflow-auto;
-      scroll-behavior: smooth;
-      width: calc(100% - 5rem);
       &::-webkit-scrollbar {
         @apply hidden;
       }
