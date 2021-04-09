@@ -2,7 +2,7 @@
   <div class="flex justify-center h-screen bg-gray-100">
     <div class="w-full h-full md:p-10 p-0 overflow-auto">
       <div
-        class="bg-white mx-auto md:max-w-sm md:shadow-lg md:rounded-lg overflow-hidden h-full md:h-auto"
+        class="bg-white mx-auto md:max-w-sm md:shadow md:rounded overflow-hidden h-full md:h-auto"
       >
         <div class="sm:flex sm:items-center p-3">
           <div class="flex-grow">
