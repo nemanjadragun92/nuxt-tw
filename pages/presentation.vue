@@ -152,7 +152,7 @@ export default class PresentationBase extends Vue {
     return this.slides.length
   }
 
-  get formatTime(): boolean | number {
+  get formatTime(): boolean | string {
     if (this.countdown === null) {
       return false
     }
@@ -174,10 +174,13 @@ export default class PresentationBase extends Vue {
   // Methods
   onCountdown() {
     this.countdownInterval = setInterval(() => {
-      this.countdown--
-      window.localStorage.setItem('countdown', this.countdown)
+      if (typeof this.countdown === 'number') {
+        this.countdown--
+      }
       if (!this.countdown) {
         this.resetCountdown(false)
+      } else {
+        window.localStorage.setItem('countdown', this.countdown!.toString())
       }
     }, 1000)
   }
