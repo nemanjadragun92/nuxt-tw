@@ -16,10 +16,11 @@ export interface PresentationInterface {
   navigationTitle: string
   title?: string
   description?: string
-  image?: string
-  imageClass?: string
   imageVariant?: { light: string; dark: string }
   credentials: CredentialsInterface
   list?: any[]
   link?: string
+  image?: string
+  imageClass?: string
+  images?: { href: string }[]
 }

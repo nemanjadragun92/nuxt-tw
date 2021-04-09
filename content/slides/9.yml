@@ -1,0 +1,8 @@
+type: "default"
+time: 100
+navigationTitle: "The head method"
+description: "Nuxt.js uses <strong>vue-meta</strong> to update the <code>headers</code> and <code>html attributes</code> of your application.
+              <br/><br/>
+              Type: <code>Object</code> or <code>Function</code>
+              Use the head</code> method to set the HTML Head tags for the current page."
+image: "/images/presentation/head-method.svg"

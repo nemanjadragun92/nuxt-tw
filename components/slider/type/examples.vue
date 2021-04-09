@@ -2,6 +2,15 @@
   <div class="examples">
     <div class="max-h-full">
       <p v-if="data.description" v-html="data.description" />
+      <template v-if="data.images && data.images.length">
+        <img
+          v-for="(image, imageIndex) in data.images"
+          :key="imageIndex"
+          :src="image.href"
+          :alt="`Presentation Image ${imageIndex}`"
+          :class="[data.imageClass]"
+        />
+      </template>
       <nuxt-link :to="data.link" target="_blank">Show example</nuxt-link>
     </div>
   </div>
@@ -41,6 +50,9 @@ export default class SliderTypeDefault extends Vue {
     @apply py-3 px-4 bg-blue-500 font-medium rounded shadow-md hover:bg-blue-600 focus:outline-none;
     @apply text-primary-50;
     @apply dark:text-primary-900;
+  }
+  img {
+    @apply block mb-8;
   }
 }
 </style>
