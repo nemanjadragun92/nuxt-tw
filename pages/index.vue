@@ -24,8 +24,10 @@
               class="my-2 w-full text-sm bg-gray-200 text-grey-darkest rounded h-10 p-3 focus:outline-none"
             />
             <div class="w-full mt-1">
+              <div v-if="!returnData.length" class="text-xs">No results...</div>
               <div
                 v-for="(item, itemIndex) in returnData"
+                v-else
                 :key="itemIndex"
                 class="flex items-center cursor-pointer my-1 hover:bg-gray-100 rounded"
               >
