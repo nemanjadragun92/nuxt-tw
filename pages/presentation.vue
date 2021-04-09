@@ -1,6 +1,6 @@
 <template>
   <div class="presentation">
-    <div class="presentation__wrapper">
+    <div class="presentation__wrapper" :class="{ fullscreen: fullscreenMode }">
       <div class="presentation__navigation">
         <button
           :class="{
@@ -50,7 +50,10 @@
           <img src="/images/logo-blue.svg" alt="Logo" />
           <span>Egoditor</span>
         </div>
-        <div class="presentation__pagination">
+        <div
+          class="presentation__pagination"
+          :class="{ fullscreen: fullscreenMode }"
+        >
           <button class="fullscreen" type="button" @click="toggleFullScreen">
             <span
               class="material-icons-outlined"
@@ -263,6 +266,9 @@ export default class PresentationBase extends Vue {
     @apply md:w-[85%] md:h-[80%] md:max-h-[768px];
     @apply bg-gray-100;
     @apply dark:bg-gray-800;
+    &.fullscreen {
+      @apply md:w-full md:h-full md:max-w-full md:max-h-full;
+    }
   }
   &__navigation {
     @apply relative;
@@ -331,6 +337,9 @@ export default class PresentationBase extends Vue {
     @apply absolute bottom-4 right-14 z-10;
     @apply md:right-4;
     @apply flex items-center;
+    &.fullscreen {
+      @apply right-16;
+    }
     button {
       @apply flex items-center justify-center mx-1;
       @apply focus:outline-none focus:text-blue-400;
