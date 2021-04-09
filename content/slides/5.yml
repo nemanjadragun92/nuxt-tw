@@ -11,3 +11,4 @@ list:
   - description: "Plugins which we can include easy in <strong class='text-blue-500'>nuxt.config</strong> and by setting correct mode even plugins without ssr support will work"
   - description: "We can put images in static/images folder and reference in code image such as /images/*"
   - description: "PWA support"
+  - description: "Nuxt content module which is module that displays content in this slides :) So this is one of good example."
