@@ -15,6 +15,7 @@
         <ul ref="presentationScrollNavigation">
           <li
             v-for="slide in slides"
+            :id="isActive(slide.slug) ? 'tabElement' : ''"
             :key="slide.slug"
             :tabindex="slide.slug"
             :class="{
@@ -237,12 +238,15 @@ export default class PresentationBase extends Vue {
     }
   }
 
-  onScroll(scrollType: 'prev' | 'next') {
+  onScroll(scrollType: 'prev' | 'next', nextValue = 0) {
     const element = this.$refs.presentationScrollNavigation as HTMLElement
     const elWidth = element.offsetWidth
     let leftScrollOffset = elWidth - 150
     if (scrollType === 'prev') {
       leftScrollOffset = -leftScrollOffset
+    }
+    if (nextValue) {
+      leftScrollOffset += nextValue
     }
     this.scrollOffsetValue += leftScrollOffset
     if (this.scrollOffsetValue > elWidth) {
@@ -268,6 +272,7 @@ export default class PresentationBase extends Vue {
       currentSlide--
       this.goToSlide(currentSlide.toString())
     }
+    this.onAutoScrollDetect('prev')
   }
 
   slideNext() {
@@ -275,6 +280,25 @@ export default class PresentationBase extends Vue {
     if (currentSlide < this.totalSlides) {
       currentSlide++
       this.goToSlide(currentSlide.toString())
+    }
+    this.onAutoScrollDetect('next')
+  }
+
+  onAutoScrollDetect(type: 'prev' | 'next') {
+    const element = this.$refs.presentationScrollNavigation as HTMLElement
+    const elWidth = element.offsetWidth
+    let elementOffset = document.getElementById('tabElement')?.offsetLeft || 0
+    const elementOffsetWidth =
+      document.getElementById('tabElement')?.offsetWidth || 0
+    elementOffset += elementOffsetWidth
+    if (type === 'prev') {
+      if (elementOffset < elWidth) {
+        this.onScroll(type)
+      }
+    } else if (type === 'next') {
+      if (elementOffset > elWidth) {
+        this.onScroll(type, elementOffsetWidth)
+      }
     }
   }
 
