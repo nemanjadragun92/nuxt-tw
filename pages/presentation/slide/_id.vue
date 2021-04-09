@@ -16,19 +16,12 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
 export default class PresentationSlide extends Vue {
   @Watch('$route.params.id')
   async onSlideChange() {
-    await this.$fetch()
+    await this.getSlideData()
   }
 
   slide: PresentationInterface | null = null
   async fetch() {
-    try {
-      this.slide = await this.$content(
-        `slides/${this.$route.params.id}`
-      ).fetch<any>()
-    } catch (e) {
-      // Redirect to first slide if current slide doesnt exist
-      await this.$nuxt.context.redirect('/presentation')
-    }
+    await this.getSlideData()
   }
 
   // Getters
@@ -44,6 +37,18 @@ export default class PresentationSlide extends Vue {
     }
     // @ts-ignore
     return () => import(`@/components/slider/type/${component}`)
+  }
+
+  // Methods
+  async getSlideData() {
+    try {
+      this.slide = await this.$content(
+        `slides/${this.$route.params.id}`
+      ).fetch<any>()
+    } catch (e) {
+      // Redirect to first slide if current slide doesnt exist
+      await this.$nuxt.context.redirect('/presentation')
+    }
   }
 
   // SEO

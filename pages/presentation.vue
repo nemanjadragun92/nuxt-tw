@@ -148,15 +148,16 @@ export default class PresentationBase extends Vue {
       }
     }
     this.onCountdown()
-    document.addEventListener('fullscreenchange', () => {
-      this.fullscreenMode = !!document.fullscreenElement
-    })
+    document.addEventListener('fullscreenchange', this.onToggleFullscreenMode)
+    window.addEventListener('keydown', this.onKeyboardNavigation)
   }
 
   beforeDestroy() {
-    document.removeEventListener('fullscreenchange', () => {
-      this.fullscreenMode = !!document.fullscreenElement
-    })
+    document.removeEventListener(
+      'fullscreenchange',
+      this.onToggleFullscreenMode
+    )
+    window.removeEventListener('keydown', this.onKeyboardNavigation)
   }
 
   // Getters
@@ -196,6 +197,22 @@ export default class PresentationBase extends Vue {
   }
 
   // Methods
+  onToggleFullscreenMode() {
+    this.fullscreenMode = !!document.fullscreenElement
+  }
+
+  onKeyboardNavigation($e: KeyboardEvent) {
+    const { key } = $e
+    switch (key) {
+      case 'ArrowRight':
+        this.slideNext()
+        break
+      case 'ArrowLeft':
+        this.slidePrev()
+        break
+    }
+  }
+
   onCountdown() {
     this.countdownInterval = setInterval(() => {
       if (typeof this.countdown === 'number') {
