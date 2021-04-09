@@ -1,8 +1,13 @@
-type: list
+type: "list"
 time: 100
-navigationTitle: List example
-title: Hooks
+navigationTitle: "More features that nuxt provides"
 list:
-  - description: Shares an idea from the <strong>Next.js</strong>
-  - description: Similar to <strong>Ember</strong> tried to pack essential set of tools
-  - description: UI rendering as main scope (abstracting away the client/server distribution)
+  - description: "We have route/page middlewares out of the box"
+  - description: "Dynamic routing based on structure inside pages/ folder"
+  - description: "Vuex store with out of the box hook that works on SSR build (nuxtServerInit)"
+  - description: "Easy way to switch mode <em><strong>ssr:</strong> true/false / <strong>target:</strong> 'server' | 'static'</em> <br/> inside <strong class='text-blue-500'>nuxt.config</strong> at any point in time"
+  - description: "New hooks outside of vue defaults: nuxtServerInit(), validate(), asyncData(), fetch()"
+  - description: "Layouts which can be applied easy on any page"
+  - description: "Plugins which we can include easy in <strong class='text-blue-500'>nuxt.config</strong> and by setting correct mode even plugins without ssr support will work"
+  - description: "We can put images in static/images folder and reference in code image such as /images/*"
+  - description: "PWA support"

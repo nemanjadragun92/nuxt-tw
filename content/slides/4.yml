@@ -1,5 +1,5 @@
-type: default
+type: "default"
 time: 100
-navigationTitle: Lifecycle hooks
-title: Hooks
-image: https://d33wubrfki0l68.cloudfront.net/ef65fd45c6a9eab7e92da6848d48fe01a6db2da8/5e564/docs/2.x/nuxt-lifecycle.svg
+navigationTitle: "Why would you use Nuxt.js over Vue?"
+description: "Nuxt.js offers many benefits to front-end developers, one of key features are SEO improvements. There are a lot of applications that needs this feature. Nuxt.js has great meta tags managing, so we could easily make specific and customisable social share windows depending on the data received from back-end. Here’s one of the examples."
+image: "/images/presentation/seo-example.png"

@@ -1,8 +1,8 @@
-type: intro
+type: "intro"
 time: 30
-navigationTitle: Welcome
-title: Welcome to presentation about
-description: Nuxt.js + Tailwind
+navigationTitle: "Welcome"
+title: "Welcome to presentation about"
+description: "Nuxt.js + Tailwind"
 imageVariant:
-  light: /images/nuxt-tw-logo-light.svg
-  dark: /images/nuxt-tw-logo-dark.svg
+  light: "/images/nuxt-tw-logo-light.svg"
+  dark: "/images/nuxt-tw-logo-dark.svg"

@@ -1,5 +1,6 @@
-type: default
+type: "default"
 time: 100
-navigationTitle: What is Nuxt.js?
-title: Title here
-description: Nuxt.js is a free and open source web application framework based on Vue.js, Node.js, Webpack and Babel.js. Nuxt is inspired by Next.js, which is a framework of similar purpose, based on React.js. The framework is advertised as a "meta-framework for universal applications".
+navigationTitle: "What is Nuxt.js?"
+description: "Nuxt.js is a frontend framework built upon Vue.js that offers great development features such as server side rendering, automatically generated routes, improved meta tags managing and SEO improvement."
+image: "https://nuxtjs.org/logos/nuxt-square.svg"
+imageClass: "w-20"

@@ -29,6 +29,7 @@ export default class SliderTypeList extends Vue {
 .list {
   @apply flex items-center justify-center text-left h-full;
   ul {
+    @apply max-w-[75%] m-auto;
     li {
       @apply text-base md:text-2xl;
     }
