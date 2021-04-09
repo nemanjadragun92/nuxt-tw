@@ -79,6 +79,12 @@
             <span class="material-icons-outlined">skip_next</span>
           </button>
         </div>
+        <div class="progress">
+          <div
+            class="progress__bar"
+            :style="{ width: `${returnSliderProgress}%` }"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -164,6 +170,10 @@ export default class PresentationBase extends Vue {
 
   get totalSlides(): number {
     return this.slides.length
+  }
+
+  get returnSliderProgress(): number {
+    return (this.currentSlide / this.totalSlides) * 100
   }
 
   get formatTime(): boolean | string {
@@ -385,6 +395,15 @@ export default class PresentationBase extends Vue {
   }
   span {
     @apply ml-2 font-medium;
+  }
+}
+.progress {
+  @apply absolute bottom-0 left-0 right-0;
+  @apply h-0.5;
+  &__bar {
+    transition: width 0.2s linear;
+    @apply bg-blue-500;
+    @apply h-full w-0;
   }
 }
 </style>
