@@ -11,7 +11,7 @@
               <nuxt-link
                 to="/presentation/slide/1"
                 target="_blank"
-                class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 pr-2 rounded text-sm flex items-center transition duration-200"
+                class="focus:outline-none focus:ring-2 focus:ring-blue-600 bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 pr-2 rounded text-sm flex items-center transition duration-200"
               >
                 <span class="mr-1">Present</span>
                 <i class="material-icons-outlined">play_arrow</i>
@@ -38,7 +38,7 @@
                 </div>
                 <nuxt-link
                   :to="`/examples/${item.slug}`"
-                  class="block w-full hover:text-blue-dark py-2 text-sm"
+                  class="block w-full py-2 text-sm focus:outline-none focus:text-blue-600"
                 >
                   {{ item.title }}
                 </nuxt-link>
