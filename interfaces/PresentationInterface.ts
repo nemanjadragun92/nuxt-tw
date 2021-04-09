@@ -19,4 +19,5 @@ export interface PresentationInterface {
   image?: string
   imageVariant?: { light: string; dark: string }
   credentials: CredentialsInterface
+  list?: any[]
 }

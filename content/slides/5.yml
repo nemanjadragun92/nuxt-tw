@@ -1,0 +1,8 @@
+type: list
+time: 100
+navigationTitle: List example
+title: Hooks
+list:
+  - description: Shares an idea from the <strong>Next.js</strong>
+  - description: Similar to <strong>Ember</strong> tried to pack essential set of tools
+  - description: UI rendering as main scope (abstracting away the client/server distribution)

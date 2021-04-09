@@ -29,10 +29,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import {
-  CredentialsInterface,
-  PresentationInterface,
-} from '~/interfaces/PresentationInterface'
+import { PresentationInterface } from '~/interfaces/PresentationInterface'
 
 @Component({
   layout: 'presentation',

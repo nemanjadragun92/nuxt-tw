@@ -2,5 +2,4 @@ type: default
 time: 100
 navigationTitle: Lifecycle hooks
 title: Hooks
-description: Nuxt.js Lifecycle Hooks
 image: https://d33wubrfki0l68.cloudfront.net/ef65fd45c6a9eab7e92da6848d48fe01a6db2da8/5e564/docs/2.x/nuxt-lifecycle.svg
