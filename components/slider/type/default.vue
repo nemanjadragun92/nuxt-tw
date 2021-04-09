@@ -1,6 +1,6 @@
 <template>
   <div class="default">
-    <div class="h-full">
+    <div class="max-h-full">
       <p v-if="data.description" v-text="data.description" />
       <template v-if="data.image">
         <a :href="data.image" target="_blank">
@@ -32,7 +32,7 @@ export default class SliderTypeDefault extends Vue {
     @apply max-w-[75%] m-auto mb-4;
   }
   a {
-    @apply block h-full;
+    @apply block;
   }
 }
 </style>
