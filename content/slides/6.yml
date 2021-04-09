@@ -1,3 +1,4 @@
+order: 6
 type: "examples"
 time: 100
 navigationTitle: "Middlewares"

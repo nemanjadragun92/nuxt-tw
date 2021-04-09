@@ -1,3 +1,4 @@
+order: 7
 type: "default"
 time: 100
 navigationTitle: "Lifecycle hooks"

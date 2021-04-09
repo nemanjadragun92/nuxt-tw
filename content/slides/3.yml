@@ -1,3 +1,4 @@
+order: 3
 type: "default"
 time: 100
 navigationTitle: "What is Nuxt.js?"

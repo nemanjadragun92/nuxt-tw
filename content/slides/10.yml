@@ -1,0 +1,5 @@
+order: 10
+type: "iframe"
+time: 100
+navigationTitle: "[Example] Dynamic pages"
+source: "https://codesandbox.io/embed/github/nuxtlabs/examples/tree/master/routing/dynamic-pages?fontsize=14&amp;hidenavigation=1&amp;module=%2Fpages%2F_continent%2F_mountain.vue&amp;theme=dark&amp;view=editor"

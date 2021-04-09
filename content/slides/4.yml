@@ -1,3 +1,4 @@
+order: 4
 type: "default"
 time: 100
 navigationTitle: "Why would you use Nuxt.js over Vue?"

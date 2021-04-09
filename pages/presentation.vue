@@ -127,7 +127,7 @@ export default class PresentationBase extends Vue {
 
   async fetch() {
     this.slides = await this.$content('slides')
-      .sortBy('slug', 'asc')
+      .sortBy('order', 'asc')
       .fetch<any>()
   }
 

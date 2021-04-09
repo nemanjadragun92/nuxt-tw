@@ -1,3 +1,4 @@
+order: 5
 type: "list"
 time: 100
 navigationTitle: "More features that nuxt provides"

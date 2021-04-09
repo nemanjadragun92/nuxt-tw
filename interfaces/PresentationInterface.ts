@@ -11,6 +11,7 @@ export interface CredentialsInterface {
 }
 
 export interface PresentationInterface {
+  order: number
   type: 'default' | 'intro' | 'credentials'
   time: number
   navigationTitle: string
@@ -23,4 +24,5 @@ export interface PresentationInterface {
   image?: string
   imageClass?: string
   images?: { href: string }[]
+  source?: string
 }
