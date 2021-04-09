@@ -67,6 +67,10 @@
           >
             <span class="material-icons-outlined">skip_previous</span>
           </button>
+          <span
+            class="text-sm opacity-50 pointer-events-none"
+            v-text="returnSliderRange"
+          />
           <button
             type="button"
             :disabled="currentSlide >= totalSlides"
@@ -147,6 +151,10 @@ export default class PresentationBase extends Vue {
   }
 
   // Getters
+  get returnSliderRange(): string {
+    return `${this.currentSlide}/${this.totalSlides}`
+  }
+
   get currentSlide(): number {
     return +this.$route.params.id
   }
