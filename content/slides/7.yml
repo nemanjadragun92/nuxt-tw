@@ -1,0 +1,4 @@
+type: "default"
+time: 100
+navigationTitle: "Lifecycle hooks"
+image: "/images/presentation/nuxt-lifecycle.svg"

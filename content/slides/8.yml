@@ -1,0 +1,11 @@
+type: "examples"
+time: 100
+navigationTitle: "Fetch"
+link: "/examples/fetch"
+description: "<strong>Nuxt.js v2.12</strong> introduces a new hook called <code>fetch</code> which you can use <strong>in any of your Vue components</strong>. Use fetch every time you need to get <strong>asynchronous</strong> data. <code>fetch</code> is called on server-side when rendering the route, and on client-side when navigating.
+              <br/><br/>
+              It exposes <code>$fetchState</code> at the component level:
+              <br/><br/>
+              <code>$fetchState.pending</code>: Boolean, allows you to display a placeholder when fetch is being called on client-side.
+              <code>$fetchState.error</code>: null or Error, allows you to display an error message
+              <code>$fetchState.timestamp</code>: Integer, is a timestamp of the last fetch, useful for caching with keep-alive"
