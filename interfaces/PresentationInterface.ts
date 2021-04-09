@@ -12,6 +12,7 @@ export interface CredentialsInterface {
 
 export interface PresentationInterface {
   type: 'default' | 'intro' | 'credentials'
+  time: number
   navigationTitle: string
   title?: string
   description?: string

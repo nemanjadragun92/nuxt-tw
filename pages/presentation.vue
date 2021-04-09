@@ -121,7 +121,7 @@ export default class PresentationBase extends Vue {
   async fetch() {
     this.slides = await this.$content('slides')
       .sortBy('slug', 'asc')
-      .fetch<PresentationInterface[]>()
+      .fetch<any>()
   }
 
   mounted() {
@@ -130,12 +130,15 @@ export default class PresentationBase extends Vue {
       this.countdown = +savedCountdown
     } else if (this.countdownInterval === null) {
       const timeInSeconds = prompt(
-        'How much time you need for presentation? (seconds)'
+        'How much time you need for presentation? (seconds) // By default smart slide timer will be user'
       )
       if (timeInSeconds) {
         this.countdown = +timeInSeconds
       } else {
-        this.countdown = 60
+        const smartSliderTimer = (this.slides as PresentationInterface[])
+          .map((obj) => obj.time)
+          .reduce((a, b) => a + b, 0)
+        this.countdown = smartSliderTimer || 60
       }
     }
     this.onCountdown()

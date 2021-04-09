@@ -1,4 +1,5 @@
 type: intro
+time: 100
 navigationTitle: Welcome
 title: Welcome to presentation about
 description: Nuxt.js + Tailwind
