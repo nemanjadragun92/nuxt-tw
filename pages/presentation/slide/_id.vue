@@ -81,7 +81,7 @@ export default class PresentationSlide extends Vue {
 <style lang="scss" scoped>
 .slide {
   @apply overflow-auto;
-  @apply px-4 py-8 pb-0 h-full;
+  @apply px-4 pt-8 h-full;
   ::v-deep {
     & > * {
       @apply h-full;
