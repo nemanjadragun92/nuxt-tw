@@ -38,6 +38,13 @@
         </button>
       </div>
       <div class="presentation__container">
+        <div v-if="formatTime" class="countdown">
+          <span v-text="formatTime" /><i
+            class="material-icons-outlined"
+            @click="resetCountdown(true)"
+            >restart_alt</i
+          >
+        </div>
         <nuxt-child />
         <div class="watermark">
           <img src="/images/logo-blue.svg" alt="Logo" />
@@ -71,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import { IContentDocument } from '@nuxt/content/types/content'
 import { PresentationInterface } from '~/interfaces/PresentationInterface'
 
@@ -79,12 +86,21 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
   layout: 'presentation',
 })
 export default class PresentationBase extends Vue {
+  @Watch('countdown')
+  onWatchCountdown(val: number) {
+    if (!val) {
+      this.$router.push('/thank-you')
+    }
+  }
+
   // Data
   slides: PresentationInterface[] | IContentDocument[] = []
   scrollOffsetValue: number = 0
   showButtonPrev: boolean = false
   showButtonNext: boolean = true
   fullscreenMode: boolean = false
+  countdown: number | null = null
+  countdownInterval: any = null
 
   // Hooks
   validate({ params, redirect }: { params: { id: string }; redirect: any }) {
@@ -102,6 +118,20 @@ export default class PresentationBase extends Vue {
   }
 
   mounted() {
+    const savedCountdown = window.localStorage.getItem('countdown')
+    if (savedCountdown) {
+      this.countdown = +savedCountdown
+    } else if (this.countdownInterval === null) {
+      const timeInSeconds = prompt(
+        'How much time you need for presentation? (seconds)'
+      )
+      if (timeInSeconds) {
+        this.countdown = +timeInSeconds
+      } else {
+        this.countdown = 60
+      }
+    }
+    this.onCountdown()
     document.addEventListener('fullscreenchange', () => {
       this.fullscreenMode = !!document.fullscreenElement
     })
@@ -122,7 +152,47 @@ export default class PresentationBase extends Vue {
     return this.slides.length
   }
 
+  get formatTime(): boolean | number {
+    if (this.countdown === null) {
+      return false
+    }
+    const duration = this.countdown
+    // Hours, minutes and seconds
+    const hrs = ~~(duration / 3600)
+    const mins = ~~((duration % 3600) / 60)
+    const secs = ~~duration % 60
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    let ret = ''
+    if (hrs > 0) {
+      ret += '' + hrs + ':' + (mins < 10 ? '0' : '')
+    }
+    ret += '' + mins + ':' + (secs < 10 ? '0' : '')
+    ret += '' + secs
+    return ret
+  }
+
   // Methods
+  onCountdown() {
+    this.countdownInterval = setInterval(() => {
+      this.countdown--
+      window.localStorage.setItem('countdown', this.countdown)
+      if (!this.countdown) {
+        this.resetCountdown(false)
+      }
+    }, 1000)
+  }
+
+  resetCountdown(reload: boolean = false) {
+    if (!reload) {
+      this.countdown = null
+    }
+    window.localStorage.removeItem('countdown')
+    clearInterval(this.countdownInterval)
+    if (reload) {
+      location.reload()
+    }
+  }
+
   onScroll(scrollType: 'prev' | 'next') {
     const element = this.$refs.presentationScrollNavigation as HTMLElement
     const elWidth = element.offsetWidth
@@ -270,6 +340,18 @@ export default class PresentationBase extends Vue {
         @apply md:flex;
       }
     }
+  }
+}
+.countdown {
+  @apply absolute top-2 right-2 z-10;
+  @apply text-xs font-medium;
+  @apply flex items-center;
+  span {
+    @apply pointer-events-none;
+  }
+  i {
+    @apply text-base ml-1 cursor-pointer hover:text-green-600;
+    line-height: 0;
   }
 }
 .watermark {
