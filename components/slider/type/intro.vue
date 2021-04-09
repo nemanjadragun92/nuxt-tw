@@ -37,10 +37,10 @@ export default class SliderTypeIntro extends Vue {
 .intro {
   @apply flex items-center justify-center text-center;
   h1 {
-    @apply text-4xl font-bold mt-6;
+    @apply text-4xl lg:text-6xl font-bold mt-6;
   }
   h3 {
-    @apply text-2xl font-medium mt-2;
+    @apply text-2xl lg:text-3xl font-medium mt-2 lg:mt-4;
   }
 }
 </style>

@@ -28,8 +28,8 @@ export default class SliderTypeDefault extends Vue {
 .default {
   @apply flex items-center justify-center text-center h-full;
   p {
-    @apply text-base md:text-2xl;
-    @apply max-w-[75%] m-auto mb-6;
+    @apply text-base lg:text-2xl;
+    @apply max-w-[90%] md:max-w-[75%] m-auto mb-6;
     ::v-deep {
       code {
         @apply text-blue-600;

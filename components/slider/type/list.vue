@@ -1,10 +1,10 @@
 <template>
   <div class="list">
-    <div>
+    <div class="max-h-full">
       <ul
         v-for="(item, itemIndex) in data.list"
         :key="itemIndex"
-        class="list-none md:list-disc"
+        class="list-none"
       >
         <li v-html="item.description" />
       </ul>
@@ -29,9 +29,14 @@ export default class SliderTypeList extends Vue {
 .list {
   @apply flex items-center justify-center text-left h-full;
   ul {
-    @apply max-w-[75%] m-auto;
+    @apply max-w-[90%] md:max-w-[75%] m-auto;
     li {
-      @apply text-base md:text-2xl;
+      @apply relative text-base lg:text-2xl pl-4 md:pl-6 mb-1 lg:mb-2;
+      &:before {
+        font-family: 'Material Icons';
+        content: 'star';
+        @apply absolute left-0 text-xs lg:text-sm top-1 lg:top-1.5 text-blue-600;
+      }
     }
   }
 }

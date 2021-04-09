@@ -49,10 +49,10 @@ export default class SliderTypeCredentials extends Vue {
 .credentials {
   @apply flex items-center justify-center text-center;
   h1 {
-    @apply text-4xl font-bold mt-4;
+    @apply text-4xl lg:text-6xl font-bold mt-4;
   }
   h3 {
-    @apply font-medium mt-2;
+    @apply font-medium mt-2 lg:text-2xl;
   }
   h6 {
     @apply text-xs inline-block px-2 py-1 rounded;

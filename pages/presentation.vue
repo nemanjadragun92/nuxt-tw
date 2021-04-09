@@ -325,7 +325,7 @@ export default class PresentationBase extends Vue {
   &__wrapper {
     @apply overflow-hidden;
     @apply w-full h-full max-w-[1280px] max-h-full;
-    @apply md:w-[85%] md:h-[80%] md:max-h-[768px];
+    @apply lg:w-[85%] lg:h-[80%] lg:max-h-[768px];
     @apply bg-gray-100;
     @apply dark:bg-gray-800;
     &.fullscreen {
@@ -397,7 +397,7 @@ export default class PresentationBase extends Vue {
   }
   &__pagination {
     @apply absolute bottom-4 right-14 z-10;
-    @apply md:right-4;
+    @apply lg:right-4;
     @apply flex items-center;
     &.fullscreen {
       @apply right-16;
