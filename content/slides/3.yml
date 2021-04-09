@@ -1,6 +1,6 @@
 type: "default"
 time: 100
 navigationTitle: "What is Nuxt.js?"
-description: "Nuxt.js is a frontend framework built upon Vue.js that offers great development features such as server side rendering, automatically generated routes, improved meta tags managing and SEO improvement."
+description: "<strong>Nuxt.js</strong> is a frontend framework built upon <strong>Vue.js</strong> that offers great development features such as server side rendering, automatically generated routes, improved meta tags managing and <strong>SEO improvement</strong>."
 image: "https://nuxtjs.org/logos/nuxt-square.svg"
 imageClass: "w-20"
