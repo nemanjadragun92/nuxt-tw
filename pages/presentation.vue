@@ -40,11 +40,10 @@
       </div>
       <div class="presentation__container">
         <div v-if="formatTime" class="countdown">
-          <span v-text="formatTime" /><i
-            class="material-icons-outlined"
-            @click="resetCountdown(true)"
+          <i class="material-icons-outlined" @click="resetCountdown(true)"
             >restart_alt</i
           >
+          <span v-text="formatTime" />
         </div>
         <nuxt-child />
         <div class="watermark">
@@ -432,14 +431,14 @@ export default class PresentationBase extends Vue {
   }
 }
 .countdown {
-  @apply absolute top-2 right-10 z-10;
+  @apply absolute top-2 left-4 z-10;
   @apply text-xs font-medium;
   @apply flex items-center;
   span {
     @apply pointer-events-none;
   }
   i {
-    @apply text-base ml-1 cursor-pointer hover:text-green-600;
+    @apply text-base mr-1 cursor-pointer hover:text-green-600;
     line-height: 0;
   }
 }
