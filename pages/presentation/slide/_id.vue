@@ -41,12 +41,16 @@ export default class PresentationSlide extends Vue {
 
   // Methods
   async getSlideData() {
+    const slideSlug = this.$route.params.id
     try {
       const response = await this.$content(`slides`)
-        .where({ slug: this.$route.params.id })
+        .where({ slug: slideSlug })
         .fetch<any>()
       if (response?.length) {
         this.slide = response[0]
+        if (process.browser) {
+          window.localStorage.setItem('slide', slideSlug)
+        }
       }
     } catch (e) {
       // Redirect to first slide if current slide doesnt exist

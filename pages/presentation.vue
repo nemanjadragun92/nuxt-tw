@@ -132,6 +132,11 @@ export default class PresentationBase extends Vue {
   }
 
   mounted() {
+    const { start } = this.$route.query
+    if (start) {
+      this.resetCountdown(true)
+      return
+    }
     const savedCountdown = window.localStorage.getItem('countdown')
     if (savedCountdown) {
       this.countdown = +savedCountdown
@@ -239,7 +244,7 @@ export default class PresentationBase extends Vue {
     window.localStorage.removeItem('countdown')
     clearInterval(this.countdownInterval)
     if (reload) {
-      location.reload()
+      window.location.href = `${window.location.origin}${window.location.pathname}`
     }
   }
 
