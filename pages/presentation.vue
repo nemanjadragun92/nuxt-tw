@@ -432,7 +432,7 @@ export default class PresentationBase extends Vue {
   }
 }
 .countdown {
-  @apply absolute top-2 right-12 z-10;
+  @apply absolute top-2 right-10 z-10;
   @apply text-xs font-medium;
   @apply flex items-center;
   span {
