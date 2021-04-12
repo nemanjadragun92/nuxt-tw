@@ -66,6 +66,11 @@
               </button>
             </div>
           </form>
+          <nuxt-link
+            class="text-sm text-purple-500"
+            to="/examples/middleware/protected"
+            >Click here to go to protected route</nuxt-link
+          >
         </div>
       </div>
     </div>

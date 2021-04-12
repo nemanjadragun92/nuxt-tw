@@ -10,13 +10,18 @@
           </h1>
         </div>
         <div class="m-7">
-          <button
-            type="button"
-            class="w-full py-3 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-            @click="onLogout"
+          <div class="mb-6">
+            <button
+              type="button"
+              class="w-full py-3 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+              @click="onLogout"
+            >
+              {{ 'Logout' }}
+            </button>
+          </div>
+          <nuxt-link class="text-sm text-purple-500" to="/examples/middleware"
+            >Click here to go to login route</nuxt-link
           >
-            {{ 'Logout' }}
-          </button>
         </div>
       </div>
     </div>
