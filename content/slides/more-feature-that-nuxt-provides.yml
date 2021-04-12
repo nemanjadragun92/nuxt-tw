@@ -1,7 +1,7 @@
 order: 5
 slug: "5"
 type: "list"
-time: 100
+time: 240
 navigationTitle: "More features that nuxt provides"
 list:
   - description: "We have route/page middlewares out of the box"

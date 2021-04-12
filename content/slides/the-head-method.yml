@@ -1,7 +1,7 @@
 order: 9
 slug: "9"
 type: "default"
-time: 100
+time: 120
 navigationTitle: "The head method"
 description: "Nuxt.js uses <strong>vue-meta</strong> to update the <code>headers</code> and <code>html attributes</code> of your application.
               <br/><br/>

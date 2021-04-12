@@ -1,6 +1,6 @@
 order: 13
 slug: "13"
 type: "iframe"
-time: 100
+time: 60
 navigationTitle: "[Example] More nuxt examples"
 source: "https://nuxtjs.org/examples"

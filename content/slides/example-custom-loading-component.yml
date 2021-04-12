@@ -1,6 +1,6 @@
 order: 12
 slug: "12"
 type: "iframe"
-time: 100
+time: 180
 navigationTitle: "[Example] Custom loading component"
 source: "https://codesandbox.io/embed/github/nuxtlabs/examples/tree/master/loading/custom-loading-component?fontsize=14&hidenavigation=1&module=%2Fcomponents%2FLoadingBar.vue&theme=dark&view=editor"

@@ -1,7 +1,7 @@
 order: 7
 slug: "7"
 type: "examples"
-time: 100
+time: 300
 navigationTitle: "Middlewares"
 link: "/examples/middleware"
 description: "The <code>middleware</code> directory contains your application middleware. Middleware lets you define custom functions that can be run before rendering either a page or a group of pages (layout).

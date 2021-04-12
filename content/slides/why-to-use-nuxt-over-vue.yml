@@ -1,7 +1,7 @@
 order: 4
 slug: "4"
 type: "default"
-time: 100
+time: 180
 navigationTitle: "Why would you use Nuxt.js over Vue?"
 description: "<strong>Nuxt.js</strong> offers many benefits to front-end developers, one of key features are SEO improvements. There are a lot of applications that needs this feature. <strong>Nuxt.js</strong> has great meta tags managing, so we could easily make specific and customisable social share windows depending on the data received from back-end. Here’s one of the examples."
 image: "/images/presentation/seo-example.png"

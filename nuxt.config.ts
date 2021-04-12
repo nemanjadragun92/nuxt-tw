@@ -52,7 +52,15 @@ export default {
     '@nuxt/content',
     // https://www.npmjs.com/package/cookie-universal-nuxt
     'cookie-universal-nuxt',
+    // https://www.npmjs.com/package/nuxt-basic-auth-module
+    'nuxt-basic-auth-module',
   ],
+
+  basic: {
+    name: 'demo',
+    pass: 'demo',
+    enabled: process.env.NODE_ENV === 'production', // require boolean value(nullable)
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
