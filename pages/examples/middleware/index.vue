@@ -19,12 +19,20 @@
               >
               <input
                 id="email"
-                v-model.trim="email"
+                v-model.trim="$v.email.$model"
                 type="email"
                 name="email"
                 placeholder="you@company.com"
                 class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
               />
+              <template v-if="error">
+                <div v-if="!$v.email.required" class="error">
+                  Email is required
+                </div>
+                <div v-else-if="!$v.email.email" class="error">
+                  Email is invalid
+                </div>
+              </template>
             </div>
             <div class="mb-6">
               <div class="flex mb-2">
@@ -36,19 +44,25 @@
               </div>
               <input
                 id="password"
-                v-model.trim="password"
+                v-model.trim="$v.password.$model"
                 type="password"
                 name="password"
                 placeholder="Your Password"
                 class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
               />
+              <template v-if="error">
+                <div v-if="!$v.password.required" class="error">
+                  Password is required
+                </div>
+              </template>
             </div>
             <div class="mb-6">
               <button
+                :disabled="loading"
                 type="submit"
-                class="w-full py-3 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+                class="w-full py-3 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign in
+                {{ loading ? 'Loading...' : 'Sign in' }}
               </button>
             </div>
           </form>
@@ -85,16 +99,29 @@
 </template>
 
 <script lang="ts">
+import { required, email } from 'vuelidate/lib/validators'
 import { Component, Vue } from 'nuxt-property-decorator'
+import { validationMixin } from 'vuelidate'
 import { UserInterface } from '~/store/auth'
 
 @Component({
-  middleware: ['auth'],
+  mixins: [validationMixin],
+  middleware: ['login'],
+  validations: {
+    email: {
+      email,
+      required,
+    },
+    password: {
+      required,
+    },
+  },
 })
 export default class ExamplesMiddleware extends Vue {
   users: UserInterface[] = []
   email: string = ''
   password: string = ''
+  loading: boolean = false
   error: { title: string; message: string } | null = null
 
   // Hooks
@@ -106,24 +133,39 @@ export default class ExamplesMiddleware extends Vue {
   async getUsers() {
     try {
       this.users = await this.$content(`users`).fetch<any>()
-      console.log('log', this.users)
     } catch (e) {
-      console.log('error')
+      console.error('Could not fetch users')
     }
   }
 
-  onLogin() {
+  async onLogin() {
+    this.loading = true
     const userAccount = this.users.find(
-      (user) => user.email === this.email && user.password === this.password
+      (user) =>
+        user.email === this.$v.email.$model &&
+        user.password === this.$v.password.$model
     )
-    if (!userAccount) {
+    this.$v.$touch()
+    if (this.$v.$invalid) {
+      this.error = {
+        title: 'Form invalid!',
+        message: 'Email or password is invalid. Please check the form...',
+      }
+    } else if (!userAccount) {
       this.error = {
         title: 'Wrong details!',
         message: 'Your account details are wrong. Please try again...',
       }
     } else {
-      console.log('ready to login')
+      await this.$store.commit('auth/SET_USER', userAccount)
+      await this.$router.push('/examples/middleware/protected')
     }
+
+    // Reset error after 3 seconds
+    setTimeout(() => {
+      this.error = null
+      this.loading = false
+    }, 3000)
   }
 }
 </script>
@@ -131,5 +173,8 @@ export default class ExamplesMiddleware extends Vue {
 <style lang="scss" scoped>
 .alert {
   @apply fixed top-2 right-2 z-50;
+}
+.error {
+  @apply text-red-500 mt-1 text-xs;
 }
 </style>

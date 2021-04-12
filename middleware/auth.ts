@@ -1,7 +1,7 @@
 import { Middleware } from '@nuxt/types'
 import { UserState } from '~/store/auth'
 
-const myMiddleware: Middleware = ({ store, redirect }) => {
+const authMiddleware: Middleware = ({ store, redirect }) => {
   const { user } = store.state.auth as UserState
   // If user is not logged in redirect him to (Login page)
   if (!user) {
@@ -9,4 +9,4 @@ const myMiddleware: Middleware = ({ store, redirect }) => {
   }
 }
 
-export default myMiddleware
+export default authMiddleware

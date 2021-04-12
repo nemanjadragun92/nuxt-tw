@@ -1,4 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { Context } from '@nuxt/types'
 
 export const state = () => ({
   darkMode: false as boolean,
@@ -25,11 +26,21 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async nuxtServerInit({ commit }) {
+  async nuxtServerInit(store, ctx: Context) {
     // On page init check if we stored darkMode if so apply dark mode on init
     const darkMode = this.$cookies.get('darkMode')
     if (darkMode) {
-      await commit('TOGGLE_DARK_MODE')
+      await store.commit('TOGGLE_DARK_MODE')
+    }
+    // Check if user is logged it (user_id represents jwtToken)
+    const userId = this.$cookies.get('user_id')
+    if (userId) {
+      const userData = await ctx.$content(`users/${userId}`).fetch<any>()
+      if (userData) {
+        await store.commit('auth/SET_USER', userData)
+      } else {
+        await store.commit('auth/LOGOUT')
+      }
     }
   },
 }

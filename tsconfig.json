@@ -28,7 +28,8 @@
       "@nuxtjs/axios",
       "@nuxt/content",
       "@types/node",
-      "@types/lodash"
+      "@types/lodash",
+      "@types/vuelidate"
     ]
   },
   "exclude": [

@@ -21,14 +21,20 @@ export const mutations: MutationTree<UserState> = {
     state.user = payload
     if (state.user) {
       // @ts-ignore
-      this.$cookies.set('user', state.user.id, {
+      this.$cookies.set('user_id', state.user.id, {
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
       })
     } else {
+      state.user = null
       // @ts-ignore
-      this.$cookies.remove('user')
+      this.$cookies.remove('user_id')
     }
+  },
+  LOGOUT(state: UserState) {
+    state.user = null
+    // @ts-ignore
+    this.$cookies.remove('user_id')
   },
 }
 
