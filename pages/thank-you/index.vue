@@ -134,16 +134,18 @@ export default class ThankYouPage extends Vue {
     const element = document.getElementById(
       `terminal_message-${this.dataIndex}`
     )
-    if (this.textCount < txt.length) {
-      element.innerHTML += txt.charAt(this.textCount)
-      this.textCount++
-      setTimeout(this.typeWriter, this.writeSpeed)
-    } else {
-      this.dataIndex++
-      this.nextMessage()
-      this.$nextTick(() => {
-        this.typeWriter()
-      })
+    if (element) {
+      if (this.textCount < txt.length) {
+        element.innerHTML += txt.charAt(this.textCount)
+        this.textCount++
+        setTimeout(this.typeWriter, this.writeSpeed)
+      } else {
+        this.dataIndex++
+        this.nextMessage()
+        this.$nextTick(() => {
+          this.typeWriter()
+        })
+      }
     }
   }
 

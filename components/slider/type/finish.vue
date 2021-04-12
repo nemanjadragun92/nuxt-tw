@@ -6,6 +6,9 @@
       </template>
       <h1>{{ data.title }}</h1>
       <h3>{{ data.description }}</h3>
+      <p @click="$router.push('/thank-you')">
+        Wonder what would happen if I did present it over defined time?
+      </p>
     </div>
   </div>
 </template>
@@ -44,6 +47,9 @@ export default class SliderTypeFinish extends Vue {
   }
   h3 {
     @apply text-2xl lg:text-3xl font-medium mt-2 lg:mt-4 opacity-50;
+  }
+  p {
+    @apply cursor-pointer text-sm lg:text-base text-red-500 font-medium mt-2;
   }
 }
 </style>
