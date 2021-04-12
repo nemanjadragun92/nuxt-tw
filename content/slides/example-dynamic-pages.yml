@@ -1,4 +1,5 @@
-order: 10
+order: 11
+slug: "11"
 type: "iframe"
 time: 100
 navigationTitle: "[Example] Dynamic pages"

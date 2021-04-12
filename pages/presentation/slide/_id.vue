@@ -42,9 +42,12 @@ export default class PresentationSlide extends Vue {
   // Methods
   async getSlideData() {
     try {
-      this.slide = await this.$content(
-        `slides/${this.$route.params.id}`
-      ).fetch<any>()
+      const response = await this.$content(`slides`)
+        .where({ slug: this.$route.params.id })
+        .fetch<any>()
+      if (response?.length) {
+        this.slide = response[0]
+      }
     } catch (e) {
       // Redirect to first slide if current slide doesnt exist
       await this.$nuxt.context.redirect('/presentation')

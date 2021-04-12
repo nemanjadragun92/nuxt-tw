@@ -1,0 +1,6 @@
+order: 10
+slug: "10"
+type: "iframe"
+time: 100
+navigationTitle: "Nuxt PWA"
+source: "https://pwa.nuxtjs.org/"
