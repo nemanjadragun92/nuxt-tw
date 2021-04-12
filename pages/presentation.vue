@@ -149,7 +149,11 @@ export default class PresentationBase extends Vue {
       }
     }
     this.onCountdown()
-    this.onAutoScrollDetect('next') // Autoscroll on page refresh if we are on different slide
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.onAutoScrollDetect('next') // Autoscroll on page refresh if we are on different slide
+      }, 250)
+    })
     document.addEventListener('fullscreenchange', this.onToggleFullscreenMode)
     window.addEventListener('keydown', this.onKeyboardNavigation)
   }
