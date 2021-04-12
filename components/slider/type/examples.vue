@@ -23,7 +23,7 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
 @Component({
   layout: 'presentation',
 })
-export default class SliderTypeDefault extends Vue {
+export default class SliderTypeExamples extends Vue {
   @Prop({ required: true })
   data!: PresentationInterface
 }

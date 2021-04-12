@@ -1,0 +1,10 @@
+order: 15
+slug: "15"
+type: "finish"
+time: 30
+navigationTitle: "Thank you!"
+title: "If you have any  further questions feel free to ask"
+description: "Thanks for your attention!"
+imageVariant:
+  light: "/images//presentation/finish.svg"
+  dark: "/images//presentation/finish.svg"

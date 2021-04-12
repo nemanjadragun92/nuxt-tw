@@ -16,7 +16,7 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
 @Component({
   layout: 'presentation',
 })
-export default class SliderTypeDefault extends Vue {
+export default class SliderTypeIframe extends Vue {
   @Prop({ required: true })
   data!: PresentationInterface
 }
