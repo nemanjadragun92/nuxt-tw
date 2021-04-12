@@ -17,7 +17,9 @@
           :key="itemIndex"
           class="mt-4 flex"
         >
-          <span :class="[item.from]">{{ item.from }}:~$</span>
+          <span :class="[item.from]"
+            >{{ item.displayName || item.from }}:~$</span
+          >
           <p
             :id="`terminal_message-${itemIndex}`"
             class="flex-1 typing items-center pl-2"
@@ -38,6 +40,7 @@
 import { Component, Vue, Watch } from 'nuxt-property-decorator'
 
 interface DataInterface {
+  displayName?: string
   from: string
   message: string
   writeSpeed: number
@@ -69,13 +72,19 @@ export default class ThankYouPage extends Vue {
     },
     {
       from: 'me',
+      displayName: 'Nemanja Dragun',
       message: 'Sorry! Next time I will try to get better!',
       writeSpeed: 100,
     },
     {
       from: 'computer',
-      message: 'I hope so! Shutting down in 5',
+      message: 'I hope so! Project shutting down in',
       writeSpeed: 50,
+    },
+    {
+      from: 'computer',
+      message: '5...',
+      writeSpeed: 250,
     },
     {
       from: 'computer',
@@ -170,6 +179,6 @@ export default class ThankYouPage extends Vue {
   @apply text-blue-400;
 }
 .coding {
-  @apply min-h-[350px];
+  @apply min-h-[400px];
 }
 </style>
