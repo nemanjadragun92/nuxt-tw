@@ -12,7 +12,8 @@ export interface CredentialsInterface {
 
 export interface PresentationInterface {
   order: number
-  type: 'default' | 'intro' | 'credentials'
+  slug: string
+  type: 'default' | 'intro' | 'credentials' | 'examples' | 'iframe'
   time: number
   navigationTitle: string
   title?: string

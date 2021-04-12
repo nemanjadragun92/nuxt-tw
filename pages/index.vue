@@ -37,10 +37,10 @@
                   >
                 </div>
                 <nuxt-link
-                  :to="`/examples/${item.slug}`"
+                  :to="item.link"
                   class="block w-full py-2 text-sm focus:outline-none focus:text-blue-600"
                 >
-                  {{ item.title }}
+                  {{ item.navigationTitle }}
                 </nuxt-link>
               </div>
             </div>
@@ -53,41 +53,39 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-
-interface DataInterface {
-  title: string
-  slug: string
-}
+import { PresentationInterface } from '~/interfaces/PresentationInterface'
 
 @Component({
   fetchDelay: 1000,
 })
 export default class PagesIndex extends Vue {
   // Data
-  data: DataInterface[] = [
-    {
-      title: 'Middleware',
-      slug: 'middleware',
-    },
-    {
-      title: 'Fetch',
-      slug: 'fetch',
-    },
-  ]
-
   keyword: string = ''
+  slides: PresentationInterface[] = []
+
+  // Hooks
+  async fetch() {
+    this.slides = await this.$content('slides')
+      .sortBy('order', 'asc')
+      .fetch<any>()
+    // Map slides to create link
+    this.slides = this.slides.map((slide) => {
+      slide.link = `/presentation/slide/${slide.slug}`
+      return slide
+    })
+  }
 
   // Getters
-  get returnData() {
+  get returnData(): PresentationInterface[] {
     if (this.keyword) {
-      return this.data.filter((obj) => {
+      return this.slides.filter((obj) => {
         return this.keyword
           .toLowerCase()
           .split(' ')
-          .every((word) => obj.title.toLowerCase().includes(word))
+          .every((word) => obj.navigationTitle.toLowerCase().includes(word))
       })
     }
-    return this.data
+    return this.slides
   }
 }
 </script>
