@@ -86,6 +86,11 @@
             :style="{ width: `${returnSliderProgress}%` }"
           />
         </div>
+        <div class="back">
+          <button type="button" @click="$router.push('/')">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -427,7 +432,7 @@ export default class PresentationBase extends Vue {
   }
 }
 .countdown {
-  @apply absolute top-2 right-2 z-10;
+  @apply absolute top-2 right-12 z-10;
   @apply text-xs font-medium;
   @apply flex items-center;
   span {
@@ -455,6 +460,17 @@ export default class PresentationBase extends Vue {
     transition: width 0.2s linear;
     @apply bg-blue-500;
     @apply h-full w-0;
+  }
+}
+.back {
+  @apply absolute top-0 right-0 z-50;
+  button {
+    @apply flex items-center justify-center focus:outline-none cursor-pointer transition duration-200;
+    @apply text-red-500 hover:bg-red-100 focus:bg-red-200;
+    @apply w-8 h-8;
+    i {
+      @apply text-2xl;
+    }
   }
 }
 </style>
