@@ -87,7 +87,7 @@
         </div>
         <div class="back">
           <button type="button" @click="$router.push('/')">
-            <i class="material-icons">close</i>
+            <i class="material-icons">home</i>
           </button>
         </div>
       </div>
@@ -104,6 +104,13 @@ import { PresentationInterface } from '~/interfaces/PresentationInterface'
   layout: 'presentation',
 })
 export default class PresentationBase extends Vue {
+  @Watch('initData')
+  onInitData(val: boolean) {
+    if (val) {
+      this.init()
+    }
+  }
+
   @Watch('countdown')
   onWatchCountdown(val: number) {
     if (!val) {
@@ -119,6 +126,7 @@ export default class PresentationBase extends Vue {
   fullscreenMode: boolean = false
   countdown: number | null = null
   countdownInterval: any = null
+  initData: boolean = false
 
   // Hooks
   validate({ params, redirect }: { params: { id: string }; redirect: any }) {
@@ -133,36 +141,10 @@ export default class PresentationBase extends Vue {
     this.slides = await this.$content('slides')
       .sortBy('order', 'asc')
       .fetch<any>()
+    this.initData = true
   }
 
   mounted() {
-    const { start } = this.$route.query
-    if (start) {
-      this.resetCountdown(true)
-      return
-    }
-    const savedCountdown = window.localStorage.getItem('countdown')
-    if (savedCountdown) {
-      this.countdown = +savedCountdown
-    } else if (this.countdownInterval === null) {
-      const timeInSeconds = prompt(
-        'How much time you need for presentation? (seconds) // By default smart slide timer will be user'
-      )
-      if (timeInSeconds) {
-        this.countdown = +timeInSeconds
-      } else {
-        const smartSliderTimer = (this.slides as PresentationInterface[])
-          .map((obj) => obj.time)
-          .reduce((a, b) => a + b, 0)
-        this.countdown = smartSliderTimer || 60
-      }
-    }
-    this.onCountdown()
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.onAutoScrollDetect('next') // Autoscroll on page refresh if we are on different slide
-      }, 250)
-    })
     document.addEventListener('fullscreenchange', this.onToggleFullscreenMode)
     window.addEventListener('keydown', this.onKeyboardNavigation)
   }
@@ -212,6 +194,36 @@ export default class PresentationBase extends Vue {
   }
 
   // Methods
+  init() {
+    const { start } = this.$route.query
+    if (start) {
+      this.resetCountdown(true)
+      return
+    }
+    const savedCountdown = window.localStorage.getItem('countdown')
+    if (savedCountdown) {
+      this.countdown = +savedCountdown
+    } else if (this.countdownInterval === null) {
+      const timeInSeconds = prompt(
+        'How much time you need for presentation? (seconds) // By default smart slide timer will be user'
+      )
+      if (timeInSeconds) {
+        this.countdown = +timeInSeconds
+      } else {
+        const smartSliderTimer = (this.slides as PresentationInterface[])
+          .map((obj) => obj.time)
+          .reduce((a, b) => a + b, 0)
+        this.countdown = smartSliderTimer || 60
+      }
+    }
+    this.onCountdown()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.onAutoScrollDetect('next') // Autoscroll on page refresh if we are on different slide
+      }, 250)
+    })
+  }
+
   onToggleFullscreenMode() {
     this.fullscreenMode = !!document.fullscreenElement
   }
@@ -246,6 +258,7 @@ export default class PresentationBase extends Vue {
       this.countdown = null
     }
     window.localStorage.removeItem('countdown')
+    window.localStorage.removeItem('slide')
     clearInterval(this.countdownInterval)
     if (reload) {
       window.location.href = `${window.location.origin}${window.location.pathname}`
@@ -467,7 +480,7 @@ export default class PresentationBase extends Vue {
   @apply absolute top-0 right-0 z-50;
   button {
     @apply flex items-center justify-center focus:outline-none cursor-pointer transition duration-200;
-    @apply text-red-500 hover:bg-red-100 focus:bg-red-200;
+    @apply text-blue-500 hover:bg-blue-100 focus:bg-blue-200;
     @apply w-8 h-8;
     i {
       @apply text-2xl;
