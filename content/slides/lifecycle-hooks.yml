@@ -1,5 +1,5 @@
-order: 7
-slug: "7"
+order: 6
+slug: "6"
 type: "default"
 time: 100
 navigationTitle: "Lifecycle hooks"
