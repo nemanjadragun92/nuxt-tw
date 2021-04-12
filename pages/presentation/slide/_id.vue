@@ -89,6 +89,11 @@ export default class PresentationSlide extends Vue {
 .slide {
   @apply overflow-auto;
   @apply px-4 h-full;
+  &::-webkit-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    @apply hidden;
+  }
   ::v-deep {
     & > * {
       @apply h-full pt-8;

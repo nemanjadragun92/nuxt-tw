@@ -366,6 +366,8 @@ export default class PresentationBase extends Vue {
       @apply flex items-center;
       @apply overflow-auto;
       &::-webkit-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
         @apply hidden;
       }
       li {
