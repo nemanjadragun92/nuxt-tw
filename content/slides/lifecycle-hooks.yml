@@ -1,6 +1,6 @@
 order: 6
 slug: "6"
 type: "default"
-time: 300
+time: 240
 navigationTitle: "Lifecycle hooks"
 image: "/images/presentation/nuxt-lifecycle.svg"
