@@ -59,6 +59,7 @@ export default class ThankYouPage extends Vue {
     }
   }
 
+  // Data
   textCount: number = 0
   writeSpeed: number = 50
   dataIndex: number = 0
@@ -116,6 +117,7 @@ export default class ThankYouPage extends Vue {
   finished: boolean = false
   finishMessage: boolean = false
 
+  // Hooks
   mounted() {
     this.nextMessage()
     this.$nextTick(() => {

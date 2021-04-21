@@ -1,6 +1,17 @@
 order: 11
 slug: "11"
-type: "iframe"
+type: "examples"
 time: 180
-navigationTitle: "[Example] Dynamic pages"
-source: "https://codesandbox.io/embed/github/nuxtlabs/examples/tree/master/routing/dynamic-pages?fontsize=14&amp;hidenavigation=1&amp;module=%2Fpages%2F_continent%2F_mountain.vue&amp;theme=dark&amp;view=editor"
+navigationTitle: "Dynamic pages"
+link: "/examples/posts"
+description: "Dynamic pages routing example:
+              <br/><br/>
+              <code>pages/examples/posts/_id/index.vue</code> shows data coming from the route params.
+              <br/>
+              <code>pages/examples/posts/index.vue</code> fetches our data from API.
+              <br/>
+              <code>pages/examples/posts/_id/_child/index.vue</code> can access <code>id</code> and fetch dynamic data based on <code>child</code>.
+              <br/><br/>
+              <code>pages/_.vue</code> if we create file with this name that means that we will support infinite number of routing params.
+              "
+
