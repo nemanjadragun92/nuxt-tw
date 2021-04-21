@@ -26,8 +26,15 @@ export default class PagesExamplesPostsIdChild extends Vue {
     }
     path: string
   } {
-    const { fullPath, name, params, path } = this.$route
-    return { fullPath, name, params, path }
+    return {
+      fullPath: this.$route.fullPath! as string,
+      name: this.$route.name! as string,
+      params: this.$route.params! as {
+        id: string
+        child: string
+      },
+      path: this.$route.path! as string,
+    }
   }
 
   // SEO
