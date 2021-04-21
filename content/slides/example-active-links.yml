@@ -1,0 +1,6 @@
+order: 13
+slug: "13"
+type: "iframe"
+time: 120
+navigationTitle: "[Example] Active link classes"
+source: "https://codesandbox.io/embed/github/nuxtlabs/examples/tree/master/routing/active-link-classes?fontsize=14&hidenavigation=1&module=%2Flayouts%2Fdefault.vue&theme=dark&view=editor"
