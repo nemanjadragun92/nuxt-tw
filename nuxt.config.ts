@@ -59,7 +59,7 @@ export default {
   basic: {
     name: 'demo',
     pass: 'demo',
-    enabled: process.env.NODE_ENV === 'production', // require boolean value(nullable)
+    enabled: process.env.NODE_ENV === 'productionDisabled', // require boolean value(nullable)
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
