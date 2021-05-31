@@ -6,8 +6,8 @@
       <h3>{{ returnCredentials.publisher.role }}</h3>
       <div class="mt-6">
         <a
-          v-if="returnCredentials.social.github"
-          :href="returnCredentials.social.github"
+          v-if="returnCredentials.social.linkedIn"
+          :href="returnCredentials.social.linkedIn"
           target="_blank"
         >
           <i class="material-icons">link</i>
@@ -21,6 +21,15 @@
         >
           <i class="material-icons">link</i>
           <span class="text-blue-500 font-bold">Github</span>
+        </a>
+        <a
+          v-if="returnCredentials.social.portfolio"
+          class="ml-2"
+          :href="returnCredentials.social.portfolio"
+          target="_blank"
+        >
+          <i class="material-icons">link</i>
+          <span class="text-blue-500 font-bold">About me</span>
         </a>
       </div>
     </div>

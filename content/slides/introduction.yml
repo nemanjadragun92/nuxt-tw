@@ -5,8 +5,7 @@ time: 30
 navigationTitle: "Introduction"
 publisher:
   name: "Nemanja Dragun"
-  role: "Frontend Developer"
+  role: "Full Stack Developer"
 date: "21.04.2021"
 social:
-  linkedIn: "https://hr.linkedin.com/in/nemanja-dragun"
-  github: "https://github.com/nemanjadragun92"
+  portfolio: "https://ndragun92.github.io/portfolio/"

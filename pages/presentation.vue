@@ -48,7 +48,6 @@
         <nuxt-child />
         <div class="watermark">
           <img src="/images/logo-blue.svg" alt="Logo" />
-          <span>Egoditor</span>
         </div>
         <div
           class="presentation__pagination"

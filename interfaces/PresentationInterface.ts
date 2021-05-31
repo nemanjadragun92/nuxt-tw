@@ -7,6 +7,7 @@ export interface CredentialsInterface {
   social: {
     linkedIn: string
     github: string
+    portfolio: string
   }
 }
 

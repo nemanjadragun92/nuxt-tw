@@ -42,5 +42,8 @@ export default class SliderTypeIntro extends Vue {
   h3 {
     @apply text-2xl lg:text-3xl font-medium mt-2 lg:mt-4;
   }
+  img {
+    max-width: 256px;
+  }
 }
 </style>
