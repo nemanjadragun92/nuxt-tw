@@ -1,30 +1,30 @@
-export interface CredentialsInterface {
+ CredentialsInterface {
   publisher: {
-    name: string
-    role: string
+    name: 
+    role: 
   }
-  data: string
+  data: 
   social: {
-    linkedIn: string
-    github: string
-    portfolio: string
+    linkedIn: 
+    github: 
+    portfolio: 
   }
 }
 
-export interface PresentationInterface {
+ PresentationInterface {
   order: number
-  slug: string
-  type: 'default' | 'intro' | 'credentials' | 'examples' | 'iframe'
+  slug: 
+  type: 'default' 'intro' 'credentials' 'examples''iframe'
   time: number
-  navigationTitle: string
-  title?: string
-  description?: string
-  imageVariant?: { light: string; dark: string }
+  navigationTitle: 
+  title?: 
+  description?: 
+  imageVariant?: { light: ; dark:  }
   credentials: CredentialsInterface
-  list?: any[]
-  link?: string
-  image?: string
-  imageClass?: string
-  images?: { href: string }[]
-  source?: string
+  list?: []
+  link?: 
+  image?: 
+  imageClass?: 
+  images?: { href:  }[]
+  source?: 
 }
